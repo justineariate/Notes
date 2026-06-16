@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .container {
+      border: 1px solid #aaa;
+      border-radius: 3px;
+      font-size: 16px;
+      padding: 12px;
+      min-width: 500px;
+      max-width: 100%;
+    }
+
+    .input-group {
+      padding: 10px;
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 10px;
+    }
+
+    .input-group .add {
+      margin-left: 10px;
+    }
+
+    /* .input {
+      width: 100%;
+      padding: 10px;
+    } */
+
+    .input {
+      width: 100%;
+      padding: 10px;
+      resize: none;
+      font-family: inherit;
+    }
+
+    .add {
+      background-color: #fff;
+      border: 1px solid #aaa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+      top: 0;
+      bottom: 0;
+      width: 50px;
+      cursor: pointer;
+    }
+
+    /* .item {
+        background-color: #aaa;
+        border: 1px solid blanchedalmond;
+        width: 370px;
+    } */
+
+    .item {
+      background-color: #aaa;
+      width: 100%;
+      min-height: 100px;
+      padding: 10px;
+      overflow-wrap: break-word; /* breaks long words */
+    }
+
+    #list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    #list li {
+      white-space: pre-wrap; /* keeps line breaks */
+    }
+    .delete {
+      cursor: pointer;
+      background-color: #fff;
+      border: 1px solid #aaa;
+      border-radius: 3px;
+      font-size: 14px;
+      margin-top: 20px;
+      padding: 10px 15px;
+    }
+    .bottom {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+
+    .add:hover,
+    .delete:hover {
+      background-color: #aaa;
+    }
+  </style>
+
+  <body>
+    <h2>Notes</h2>
+    <div class="container">
+      <div class="input-group">
+        <!-- <input type="text" class="input" placeholder="Create sentence here" /> -->
+        <textarea
+          class="input"
+          placeholder="Create sentence here"
+          rows="4"
+        ></textarea>
+        <button class="add" id="addBtn">Add</button>
+      </div>
+      <div class="top"></div>
+
+      <div class="item">
+        <ul id="list">
+          <!-- content here -->
+        </ul>
+      </div>
+      <div class="bottom">
+        <button class="delete" id="deleteBtn">Delete</button>
+      </div>
+    </div>
+  </body>
+  <script>
+    const input = document.querySelector('.input');
+    const addBtn = document.querySelector('#addBtn');
+    const deleteBtn = document.querySelector('#deleteBtn');
+    const list = document.querySelector('#list');
+
+    addBtn.addEventListener('click', () => {
+      const text = input.value.trim();
+
+      if (text === '') return;
+
+      list.innerHTML = '';
+
+      const li = document.createElement('li');
+      li.textContent = text;
+
+      list.appendChild(li);
+      input.value = '';
+    });
+
+    deleteBtn.addEventListener('click', () => {
+      list.innerHTML = '';
+    });
+
+    // Optional
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        addBtn.click();
+      }
+    });
+  </script>
+</html>
